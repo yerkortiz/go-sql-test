@@ -16,7 +16,7 @@ func TestInsertUserPass(t *testing.T) {
 	}
 	defer db.Close()
 	fmt.Println(sqlmock.NewResult(1, 1))
-	mock.ExpectExec("INSERT INTO user").WithArgs("bolas", "secas").WillReturnResult(sqlmock.NewResult(1, 1))
+	mock.ExpectExec("INSERT INTO user").WithArgs("user", "123").WillReturnResult(sqlmock.NewResult(1, 1))
 
 	_, err = InsertUser(db, "user", "123")
 	if err != nil {
@@ -34,7 +34,7 @@ func TestInsertUserFail(t *testing.T) {
 	}
 	defer db.Close()
 
-	mock.ExpectExec("INSERT INTO user").WithArgs("bolas", "secas").WillReturnError(errors.New("XD"))
+	mock.ExpectExec("INSERT INTO user").WithArgs("user", "123").WillReturnError(errors.New("XD"))
 
 	_, err = InsertUser(db, "user", "123")
 	if err != nil {
